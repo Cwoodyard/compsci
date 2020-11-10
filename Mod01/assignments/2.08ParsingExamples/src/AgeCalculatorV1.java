@@ -4,7 +4,7 @@
  * @author Ada Lovelace
  * @version 7/1/2019
  */
-import java.util.Scanner;
+
 public class AgeCalculatorV1
 {
     public static void main(String[] args)
