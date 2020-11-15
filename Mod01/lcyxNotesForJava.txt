@@ -1,0 +1,4 @@
+switch INSTEAD OF IF ELSE STATEMENTS good except for strings
+change if else to a switch
+recycle printwriter
+enums
