@@ -1,110 +1,84 @@
+
 /*
- * want to have a function where it will first run for 1000+ times,
- * next want to have a function that will edit/create a file that will log results
- * finally want to build a categorization tool to seperate each breed of cat
- * if it detects a Sphynx cat, it will reset the overall trial count and build from there
- * 
- * Sphynx
- * Calico
- * Persian
- * Siamese
- * 
- * 
+ * Author: Cole Woodyard
+ * Version: r11.15.20
  * 
  * 
  */
-import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.util.Scanner;
+import java.util.concurrent.ThreadLocalRandom;
+
 public class AnimalPopulation {
-	//identifying the needed variables as public since they will be used in more than 1 function
-	public static int Calico = 0; // rolls a 1
-	public static int Persian = 0; // rolls a 2
-	public static int Siamese = 0; // rolls a 3
-	public static int Siberian = 0; // rolls a 4
-	public static int Ocicat = 0; // rolls a 5
-	public static int Sphynx = 0; // rolls a 6
-	public static int totalCounter = 0; // Used to count a total
-	public static String animal = "Cat";
-	public static String detected = " ";
-	
-	//Identifying needed functions before the main to make it more organized for myself
-	public static void writer(int trial) throws FileNotFoundException { //plan to use this as a way to write to the file
-		PrintWriter rawFile = new PrintWriter(new File("raw.txt"));
-		rawFile.println("Trial " + trial + " had: ");
-		rawFile.println(" Calico: " + Calico);
-		rawFile.println(" Persian: " + Persian);
-		rawFile.println(" Siamese: " + Siamese);
-		rawFile.println(" Siberian: " + Siberian);
-		rawFile.println(" Ocicat: " + Ocicat);
-		rawFile.println(" Sphynx: " + Sphynx);
-		rawFile.close( );
-	}
-	
-	public static void main(String[] args) throws FileNotFoundException {
-		
-		for (int trial = 1; trial <= 1000; trial++) {
-			
-			detected = " ";
-			totalCounter = 0;
-			System.out.println("******************************");
-			System.out.println("Trial: " + trial);
-			while(!detected.equalsIgnoreCase("Sphynx")) {
-				int diceRoll = (int) (Math.random() * 6) + 1; // Roll Dice 
-					
-				if((int)diceRoll == 1) { // Calico
-					totalCounter++;
-					Calico++;
-					System.out.println("Number: " + diceRoll);
-					System.out.println("Found a Calico");
-					
-					
-				} else if ((int)diceRoll == 2) { // Persian
-					totalCounter++;
-					Persian++;
-					System.out.println("Number: " + diceRoll);
-					System.out.println("Found a Persian");
-					
-					
-				} else if ((int)diceRoll == 3) { // Siamese
-					totalCounter++;
-					Siamese++;
-					System.out.println("Number: " + diceRoll);
-					System.out.println("Found a Siamese");
-					
-					
-				} else if ((int)diceRoll == 4) { // Siberian
-					totalCounter++;
-					Siberian++;
-					System.out.println("Number: " + diceRoll);
-					System.out.println("Found a Siberian");
-					
-					
-				} else if ((int)diceRoll == 5) { //Ocicat
-					totalCounter++;
-					Ocicat++;
-					System.out.println("Number: " + diceRoll);
-					System.out.println("Found a Ocicat");
-					
-					
-				} else { // Sphynx
-					totalCounter++;
-					Sphynx++;
-					detected = "Sphynx";
-					System.out.println("Number: " + diceRoll);
-					System.out.println("Found a Sphynx");
-					
-					
-				}
-				System.out.println("Round: " + totalCounter);
-				
-			}
-			System.out.println("******************************");
-			System.out.println();
-			writer(trial);
-			
-			
-		}
-	}
+    // identifying the needed variables as public since they will be used in more
+    // than 1 function
+
+    private static int totalCounter = 0; // Used to count a total
+
+    public static enum Cats { // used enums rather than a sting list to make life a bit easier and less memory
+                              // being used instead of identifying what each math.random int is within main
+                              // code (more organized and clean)
+        CALICO,
+        PERSIAN,
+        SIAMESE,
+        SIBERIAN,
+        OCICAT,
+        SPHYNX;
+
+        public int count;
+    }
+
+    public static void main(String[] args) throws FileNotFoundException { // started the function main
+        int totalRounds = 0;
+        Scanner in = new Scanner(System.in);
+        System.out.println("Welcome, how many trials would you like to conduct?\n" + "We only accept over 1000 trials: ");
+        int trialRequestAmount = in.nextInt();
+        if (trialRequestAmount <= 1000) { // identifies if the requested amount is less than 1000, if so it terminates
+                                          // the program and requests the user to restart
+            System.out.println("That value was incorrect, please try again. How many trials would you like to conduct?\n" + "We only accept over 1000 trials: ");
+            trialRequestAmount = in.nextInt();
+        }
+        in.close(); // closes the Scanner to prevent memory leak
+        System.out.println("Thank you, Processing: "); // outputs a processing message to the console
+
+        PrintWriter pw = new PrintWriter(new File("results.txt")); // used printwriter to state this is our document
+
+        for (int trial = 1; trial <= trialRequestAmount; trial++) { // started a for loop for a thousand trials
+
+            totalCounter = 1; // sets the total amount of cats to 0 every trial loop
+//            System.out.println("******************************"); // part of the console output as divider
+//            System.out.println("Trial: " + trial); // states in console what trial we are on
+            while (totalCounter <= 20) { // set a max and told it to stop if it hits the max
+                Cats result = Cats.values()[ThreadLocalRandom.current().nextInt(Cats.values().length)]; // ThreadLocalRandom is used instead of the math.random (better memory) | states
+                                                                                                        // that each item within the enum is an int
+                result.count++; // tells that for each result it is to increase the counter for that result
+
+                pw.println("Trial " + trial + " had: "); // prints the "trial (trial Number) had: " to the output file
+                for (Cats breed : Cats.values()) { // starts a for loop where it tells that each enum line is a breed and that each
+                                                   // breed has a value
+                    pw.print(breed.name()); // prints the breed name to the file
+                    pw.print(" had "); // prints had to the output file
+                    pw.print(breed.count); // prints the count of how many times that breed/cat has been counted up
+                    pw.println(); // prints a new line to make it more readable
+                }
+                pw.println(); // prints a new line to make it more readable
+                totalRounds++;
+
+                if (result == Cats.SPHYNX) { // told that if there is a sphynx detected, it will end the loop
+                    break; // ends the loop
+                }
+                totalCounter++; // tells the function that there has been a full loop
+            }
+//            System.out.println("Rounds: " + totalCounter); // prints how many rounds each loop had in console
+//
+//            System.out.println("******************************"); // another divider for console
+//            System.out.println(); // new line break to make the output readable in console
+
+        }
+        pw.close(); // closes the PrintWriter to prevent memory leaks
+        double finalAverage = (int) (((double) totalRounds / trialRequestAmount) * 100) / 100.0; // calculates the average of all the trials
+        System.out.println("The Average number of cats found before a Sphynx was found is:  " + finalAverage); // posts the final message into the console with the final average
+    }
 }
