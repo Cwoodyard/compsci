@@ -10,20 +10,46 @@ import java.util.Scanner;
  * 
  */
 public class GradesV3 {
+
     public GradesV3() {
 
     }
 
-    public static void gradeCollection() {
-        Scanner scan = new Scanner(System.in);
-        System.out.println("Please enter your grades in number form and enter more than 1 grade: ");
-        String grades = scan.nextLine();
-        System.out.println(grades);
-        int gradeInt = Integer.parseInt(grades);
+    public double calcAv(double x, double y) {
 
+        double calcAvF = 0;
+        if (y > x) {
+            calcAvF = (y + x) / 2;
+        } else {
+            calcAvF = (x + y) / 2;
+        }
+
+        return calcAvF;
+    }
+
+    public double calcDif(double x, double y) {
+
+        double calcDifF = 0;
+        if (y > x) {
+            calcDifF = y - x;
+        } else {
+            calcDifF = x - y;
+        }
+        return calcDifF;
     }
 
     public static void main(String[] args) {
-        gradeCollection();
+        GradesV3 grades = new GradesV3();
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Please enter 2 number grades by separating them with a space: ");
+        double grade1 = scan.nextDouble();
+        double grade2 = scan.nextDouble();
+        double gradesAv = Math.round(grades.calcAv(grade1, grade2) * 100);
+        double gradesD = Math.round(grades.calcDif(grade1, grade2) * 100);
+        System.out.println("\t\tGrades:");
+        System.out.println("Grade 1\tGrade 2\tAverage\tDifference");
+        System.out.println("===================================");
+        System.out.println(grade1 + " \t" + grade2 + " \t" + gradesAv / 100 + " \t" + gradesD / 100);
+
     }
 }

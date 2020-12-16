@@ -4,7 +4,7 @@ public class DateFormatConverter
 
 {
 
-    //  convert the ISO date format YYYY-MM-DD to US date format MM/DD/YYYY
+    // convert the ISO date format YYYY-MM-DD to US date format MM/DD/YYYY
 
     public static String convertToUS(String date)
 
@@ -14,15 +14,11 @@ public class DateFormatConverter
 
         String year = date.substring(0, pos1);
 
-
-
         String temp = date.substring(pos1 + 1);
 
         int pos2 = temp.indexOf("-");
 
         String month = temp.substring(0, pos2);
-
-
 
         String day = temp.substring(pos2 + 1);
 
@@ -30,9 +26,7 @@ public class DateFormatConverter
 
     }
 
-
-
-    //  convert the ISO date format YYYY-MM-DD to European date format DD/MM/YYYY
+    // convert the ISO date format YYYY-MM-DD to European date format DD/MM/YYYY
 
     public static String convertToEuropean(String date)
 
@@ -42,23 +36,17 @@ public class DateFormatConverter
 
         String year = date.substring(0, pos1);
 
-
-
         String temp = date.substring(pos1 + 1);
 
         int pos2 = temp.indexOf("-");
 
         String month = temp.substring(0, pos2);
 
-
-
         String day = temp.substring(pos2 + 1);
 
         return day + "/" + month + "/" + year;
 
     }
-
-
 
     // the main method
 
@@ -72,17 +60,11 @@ public class DateFormatConverter
 
         System.out.println("Enter the ISO formatted date YYYY-MM-DD");
 
-        String isoDate = in .nextLine();
-
-
+        String isoDate = in.nextLine();
 
         String usDate = convertToUS(isoDate);
 
-
-
         String euroDate = convertToEuropean(isoDate);
-
-
 
         // print the results
 
