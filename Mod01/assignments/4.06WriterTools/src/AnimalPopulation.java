@@ -17,7 +17,8 @@ public class AnimalPopulation {
 
     private static int totalCounter = 0; // Used to count a total
 
-    public static enum Cats { // used enums rather than a sting list to make life a bit easier and less memory
+    public static enum Cats { // used enums rather than a string list to make life a bit easier and less
+                              // memory
                               // being used instead of identifying what each math.random int is within main
                               // code (more organized and clean)
         CALICO,
