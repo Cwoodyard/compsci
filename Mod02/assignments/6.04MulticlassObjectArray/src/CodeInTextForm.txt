@@ -1,0 +1,123 @@
+GradeTesterV10.java
+import java.util.Scanner;
+
+/*  Author: Cole Woodyard
+ *  Desc: Main code. Client side
+ *  Version: 2/01/2021
+ */
+public class GradesTesterV10 {
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+
+        String student1 = "August";
+        String student2 = "Jack";
+        String student3 = "Summer";
+
+        System.out.println("Please enter the 2 grades for August, seperated by a space: ");
+        double gradeA1 = scan.nextDouble();
+        double gradeB1 = scan.nextDouble();
+        System.out.println("Please enter the 2 grades for Jack, seperated by a space: ");
+        double gradeA2 = scan.nextDouble();
+        double gradeB2 = scan.nextDouble();
+        System.out.println("Please enter the 2 grades for Summer, seperated by a space: ");
+        double gradeA3 = scan.nextDouble();
+        double gradeB3 = scan.nextDouble();
+
+        double av = 0.0;
+        double dif = 0.0;
+        GradesV10[] students = {
+                new GradesV10(student1, gradeA1, gradeB1),
+                new GradesV10(student2, gradeA2, gradeB2),
+                new GradesV10(student3, gradeA3, gradeB3)
+        };
+
+        System.out.println("\t\tGrades:");
+        System.out.printf("%-9s%-10s%-10s%-9s%-9s", "Student", "Grade 1", "Grade 2", "Average", "Difference");
+        System.out.println();
+        System.out.println("=================================================");
+        for (GradesV10 st : students) {
+            av = st.calcAv();
+            dif = st.calcDif();
+            System.out.printf("%-1s%-9.1f%-9.1f", st + "", av, dif);
+            System.out.println();
+        }
+
+        scan.close();
+    }
+}
+##################################################################################
+GradesV10.java
+/*  Author: Cole Woodyard
+ *  Desc: Code for calculations for Tester code
+ *  Version: 2/01/2021
+ */
+public class GradesV10 {
+    private double y;
+    private double x;
+    private String stName;
+
+    public GradesV10(String name) {
+        stName = name;;
+        x = 0.0;
+        y = 0.0;
+    }
+
+    public GradesV10(String name, double g1, double g2) {
+        stName = name;
+        x = g1;
+        y = g2;
+    }
+
+    public double calcAv() {
+
+        double calcAvF = 0;
+        if (y > x) {
+            calcAvF = (y + x) / 2;
+        } else {
+            calcAvF = (x + y) / 2;
+        }
+
+        return calcAvF;
+    }
+
+    public double calcDif() {
+
+        double calcDifF = 0;
+        if (y > x) {
+            calcDifF = y - x;
+        } else {
+            calcDifF = x - y;
+        }
+        return calcDifF;
+    }
+
+    public String getName() {
+        return stName;
+    }
+
+    public double getGrade1() {
+        return x;
+    }
+
+    public double getGrade2() {
+        return y;
+    }
+
+    public void setName(String name) {
+        stName = name;
+    }
+
+    public void setGrade1(double g1) {
+        x = g1;
+    }
+
+    public void setGrade2(double g2) {
+        y = g2;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%-9s%-10.1f%-10.1f", getName(), getGrade1(), getGrade2());
+    }
+
+}
