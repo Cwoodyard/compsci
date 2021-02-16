@@ -1,18 +1,19 @@
+import java.util.Scanner;
+
 /**
  * The purpose of this program is to calculate your age in minutes
  *
- * @author Ada Lovelace
+ * @author  Ada Lovelace
+ * 
  * @version 7/1/2019
  */
 
-public class AgeCalculatorV1
-{
-    public static void main(String[] args)
-    {
-    	//construct a Scanner object called in
+public class AgeCalculatorV1 {
+    public static void main(String[] args) {
+        // construct a Scanner object called in
         Scanner in = new Scanner(System.in);
 
-		//ask user for input
+        // ask user for input
         System.out.print("Please enter your name (first last): ");
         String firstName = in.next();
         System.out.println(firstName);
@@ -25,7 +26,7 @@ public class AgeCalculatorV1
         double ageInYears = Integer.parseInt(userAge);
         System.out.println(ageInYears);
 
-		//calculate age in minutes
+        // calculate age in minutes
         double approxAgeInDays = ageInYears * 365.25;
         System.out.println(approxAgeInDays); //
         double ageInHours = approxAgeInDays * 24;
@@ -33,12 +34,12 @@ public class AgeCalculatorV1
         double ageInMinutes = ageInHours * 60;
         System.out.println(ageInMinutes); //
 
-        String firstInitial = firstName.substring(0,1);
-        String name =  firstInitial + ". " + lastName;
+        String firstInitial = firstName.substring(0, 1);
+        String name = firstInitial + ". " + lastName;
 
-		// display name and minutes to screen
-        System.out.print("\t Age in Minutes: " + (int)ageInMinutes + "\n");
+        // display name and minutes to screen
+        System.out.print("\t Age in Minutes: " + (int) ageInMinutes + "\n");
         System.out.print("Name: " + name);
-        System.out.print("\t\t Age in Minutes: " + (int)ageInMinutes + "\n");
+        System.out.print("\t\t Age in Minutes: " + (int) ageInMinutes + "\n");
     }
 }

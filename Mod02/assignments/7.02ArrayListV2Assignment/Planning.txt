@@ -1,0 +1,28 @@
+GIVEN
+A basic 9-inch cheesecake serves 16 people and has the following ingredients:
+
+    32 ounces of cream cheese
+    1/3 cup of sugar
+    1 teaspoon of Vanilla flavoring
+
+Tester: just to test values and have UI
+
+	Create the array list and values
+	Must have 6 different cheesecake orders in the array list
+	ex: Blueberry, 4. (order 0 has 4 blueberry cheesecakes)
+
+Main: for actual calculations and background tasks
+
+	include: 
+	public void calcTotalServings()
+		calculate base servings * number of cakes
+	public void calcCreamCheese()
+		calculate base cream cheese * number of cakes
+	public void calcSugar()
+		calculate base sugar * number of cakes
+	public void calcVanila()
+		calculate base vanilla * number of cakes
+
+
+In a loop, print the data so that it will show: 
+Index, quantity, flavor, amount of cream cheese, servings, sugar, and vanilla
