@@ -1,0 +1,213 @@
+import java.util.ArrayList;
+
+/**
+ * @purpose To demonstrate how to use the selection sort algorithm.
+ * 
+ * @author  Cole Woodyard
+ * 
+ * @version 02/10/2021
+ */
+public class MovieTesterV3 {
+
+    public static void movieLister(ArrayList<Movie> movie) {
+        System.out.println("\t\t\tList of Movies");
+        for (Movie titles : movie) {
+            System.out.println(titles);
+
+        }
+        System.out.println();
+    }
+
+    public static void sortTitle(ArrayList<Movie> movie, int param) {
+        System.out.println("Sorting Initialized: " + param);
+        int i;
+        int k;
+        int posMax;
+        Movie temp;
+        switch (param) {
+            case (1):
+                i = 0;
+                k = 0;
+                for (i = movie.size() - 1; i > 0; i--) {
+                    posMax = 0;
+
+                    for (k = 1; k <= i; k++) {
+                        if (movie.get(k).getTitle().compareTo(movie.get(posMax).getTitle()) > 0) posMax = k;
+                    }
+
+                    temp = movie.get(i);
+                    movie.set(i, movie.get(posMax));
+                    movie.set(posMax, temp);
+
+                }
+                break;
+            case (2):
+                i = 0;
+                k = 0;
+                for (i = movie.size() - 1; i > 0; i--) {
+                    posMax = 0;
+
+                    for (k = 1; k <= i; k++) {
+                        if (movie.get(k).getTitle().compareTo(movie.get(posMax).getTitle()) < 0) posMax = k;
+                    }
+
+                    temp = movie.get(i);
+                    movie.set(i, movie.get(posMax));
+                    movie.set(posMax, temp);
+
+                }
+                break;
+            default:
+                System.out.println("You have entered an incorrect value. Please enter: ");
+                System.out.println("1 for Acending order");
+                System.out.println("2 for Decending order");
+                break;
+        }
+
+        movieLister(movie);
+
+    }
+
+    public static void sortYear(ArrayList<Movie> movie, int param) {
+        System.out.println("Sorting Initialized: " + param);
+
+        switch (param) {
+            case (1):
+                int i;
+                int k;
+                int posMax;
+                Movie temp;
+
+                for (i = movie.size() - 1; i >= 0; i--) {
+                    // find largest element in the i elements
+                    posMax = 0;
+                    for (k = 0; k <= i; k++) {
+                        if (movie.get(k).getYear() > movie.get(posMax).getYear()) posMax = k;
+                    }
+                    // swap the item with the largest cost
+                    // with the element in position i
+                    // now the item is in its proper location
+                    temp = movie.get(i);
+                    movie.set(i, movie.get(posMax));
+                    movie.set(posMax, temp);
+
+//                    movie[i] = movie[posMax];
+//                    movie[posMax] = temp;
+
+                    // Debugging Statements
+                    // uncomment to print the listings after each pass through the sort
+//                    System.out.println("\nPass # " + i);
+//                    for (Movie h : movie) if (h != null) System.out.printf("$%10d \n", h.getYear());
+                }
+                break;
+            case (2):
+
+                for (i = movie.size() - 1; i >= 0; i--) {
+                    // find largest element in the i elements
+                    posMax = 0;
+                    for (k = 0; k <= i; k++) {
+                        if (movie.get(k).getYear() < movie.get(posMax).getYear()) posMax = k;
+                    }
+                    // swap the item with the largest cost
+                    // with the element in position i
+                    // now the item is in its proper location
+                    temp = movie.get(posMax);
+                    movie.set(posMax, movie.get(i));
+                    movie.set(i, temp);
+
+                    // Debugging Statements
+                    // uncomment to print the listings after each pass through the sort
+//                    System.out.println("\nPass # " + i);
+//                    for (Movie h : movie) if (h != null) System.out.printf("$%10d \n", h.getYear());
+                }
+                break;
+            default:
+                System.out.println("You have entered an incorrect value. Please enter: ");
+                System.out.println("1 for Acending order");
+                System.out.println("2 for Decending order");
+                break;
+        }
+
+        movieLister(movie);
+
+    }
+
+    public static void sortStudio(ArrayList<Movie> movie, int param) {
+        System.out.println("Sorting Initialized: " + param);
+        int i;
+        int k;
+        int posMax;
+        Movie temp;
+        switch (param) {
+            case (1):
+                i = 0;
+                k = 0;
+                for (i = movie.size() - 1; i > 0; i--) {
+                    posMax = 0;
+
+                    for (k = 1; k <= i; k++) {
+                        if (movie.get(k).getStudio().compareTo(movie.get(posMax).getStudio()) > 0) posMax = k;
+                    }
+
+                    temp = movie.get(i);
+                    movie.set(i, movie.get(posMax));
+                    movie.set(posMax, temp);
+
+                }
+                break;
+            case (2):
+                i = 0;
+                k = 0;
+                for (i = movie.size() - 1; i > 0; i--) {
+                    posMax = 0;
+
+                    for (k = 1; k <= i; k++) {
+                        if (movie.get(k).getStudio().compareTo(movie.get(posMax).getStudio()) < 0) posMax = k;
+                    }
+
+                    temp = movie.get(i);
+                    movie.set(i, movie.get(posMax));
+                    movie.set(posMax, temp);
+
+                }
+                break;
+            default:
+                System.out.println("You have entered an incorrect value. Please enter: ");
+                System.out.println("1 for Acending order");
+                System.out.println("2 for Decending order");
+                break;
+        }
+
+        movieLister(movie);
+
+    }
+
+    public static void main(String[] args) {
+        ArrayList<Movie> movies = new ArrayList<Movie>();
+        movies.add(new Movie("Meet the Robinsons", 2007, "Disney"));
+        movies.add(new Movie("Grown Ups 2", 2013, "Happy Madison Productions"));
+        movies.add(new Movie("Pacific Rim", 2013, "Universal Pictures"));
+        movies.add(new Movie("Enders Game", 2013, "Lionsgate"));
+        movies.add(new Movie("Shazam!", 2019, "New Line Cinema"));
+        movies.add(new Movie("Megamind", 2010, "Dreamworks Animation"));
+        movies.add(new Movie("Avatar", 2009, "Twentieth Century Fox"));
+        movies.add(new Movie("Ready Player One", 2018, "Warner Bros"));
+        movies.add(new Movie("The Incredibles", 2004, "Pixar"));
+        movies.add(new Movie("Life of Pi", 2012, "Fox 2000 Pictures"));
+
+        System.out.println("Base List");
+        movieLister(movies);
+
+        System.out.println("Sorting by Title");
+        sortTitle(movies, 1);
+        sortTitle(movies, 2);
+
+        System.out.println("Sorting by Year");
+        sortYear(movies, 1);
+        sortYear(movies, 2);
+
+        System.out.println("Sorting by Studio");
+        sortStudio(movies, 1);
+        sortStudio(movies, 2);
+    }
+}
