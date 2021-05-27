@@ -1,0 +1,291 @@
+QuadTest.java
+
+/**
+ * Main Class that interacts with the other subclasses
+ *
+ * @author  Cole Woodyard 
+ * 
+ * @version 5/13/2021
+ */
+import java.util.ArrayList;
+
+public class QuadTest {
+    static ArrayList<Rectangle4> quads = new ArrayList<Rectangle4>();
+
+    public static String showEffectBoth(int opt1, int opt2) {
+        // Creating int values to measure
+        int opt1Size;
+        int opt2Size;
+
+        // Setting Values to measure
+        opt1Size = quads.get(opt1).getLength() * quads.get(opt1).getWidth() * quads.get(opt1).getHeight();
+        opt2Size = quads.get(opt2).getLength() * quads.get(opt2).getWidth() * quads.get(opt2).getHeight();
+
+        if (opt1Size == 0) {
+            opt1Size = quads.get(opt1).getLength() * quads.get(opt1).getWidth();
+        }
+        if (opt2Size == 0) {
+            opt2Size = quads.get(opt2).getLength() * quads.get(opt2).getWidth();
+        }
+
+        // Return area
+        if (opt1Size == opt2Size) {
+            return quads.get(opt1).toString() + " IS the same size as " + quads.get(opt2).toString();
+        } else {
+            return quads.get(opt1).toString() + " IS NOT the same size as " + quads.get(opt2).toString();
+        }
+
+    }
+
+    public static void main(String[] args) {
+        // Array will call the Class name with size parameters
+        quads.add(new Rectangle4(6, 4));
+        quads.add(new Box4(4, 4, 4));
+        quads.add(new Box4(4, 1, 12));
+        quads.add(new Cube4(4, 4, 4));
+        quads.add(new Quadrilateral1(4, 6, 13));
+        quads.add(new Diamond1(6, 3, 9));
+
+        // List the Shapes and sizes
+        System.out.println("Current Shapes: ");
+        System.out.println();
+        for (int i = 0; i < quads.size(); i++) {
+            System.out.println(quads.get(i).toString());
+        }
+        System.out.println();
+
+        // Loop will call showEffectBoth with 2 of the items in the array
+        for (int i = 0; i < quads.size(); i++) {
+            for (int f = i + 1; f < quads.size(); f++) {
+                System.out.println(showEffectBoth(i, f));
+            }
+            System.out.println();
+        }
+
+        // Debug
+//        System.out.println(showEffectBoth(0, 2));
+//        System.out.println(quads.get(3).toString());
+    }
+}
+#################################
+Rectangle4.java
+/**
+ * This class defines a Rectangle object using length and width. The toString
+ * method has been added.
+ *
+ *
+ * @author  Poly Morphism edited by Cole Woodyard
+ * 
+ * @version 06/13/17 edited 5/13/2021
+ */
+public class Rectangle4 {
+    // instance variables
+    private int length;
+    private int width;
+    private int height;
+
+    // Constructor for objects of class Rectangle
+    public Rectangle4(int l, int w) {
+        // initialize instance variables
+        length = l;
+        width = w;
+    }
+
+    public Rectangle4(int l, int w, int h) {
+        // initialize instance variables
+        length = l;
+        width = w;
+        height = h;
+    }
+
+    // return the height
+    public int getLength() {
+        return length;
+    }
+
+    // return the width
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    // return the name
+    public String getName() {
+        return "Rectangle";
+    }
+    // String to display when object is printed.
+
+    @Override
+    public String toString() {
+        return getName() + " - " + length + " X " + width;
+    }
+
+}
+#########################################
+Box4.java
+/**
+ * This class defines a Box object by extending Rectangle and includes height.
+ * The toString method has been added.
+ *
+ * @author  Poly Morphism edited by Cole Woodyard
+ * 
+ * @version 06/13/17 edited 5/13/2021
+ */
+public class Box4 extends Rectangle4 {
+    // instance variables
+    private int height;
+
+    // Constructor for objects of class Box
+    public Box4(int l, int w, int h) {
+        // call superclass
+        super(l, w, 0);
+
+        // initialize instance variables
+        height = h;
+    }
+
+    // return the height
+    @Override
+    public int getHeight() {
+        return height;
+    }
+
+    // return the name
+    @Override
+    public String getName() {
+        return "Box";
+    }
+
+    // String to display when object is printed.
+
+    @Override
+    public String toString() {
+        return getName() + " - " + getLength() + " X " + getWidth() + " X " + height;
+    }
+
+}
+#################################
+Cube4.java
+/**
+ * This class defines a Cube object by extending Box. The toString method has
+ * been added.
+ *
+ * @author  Cole Woodyard
+ * 
+ * @version 5/13/2021
+ */
+public class Cube4 extends Box4 {
+    // instance variables
+
+    // Constructor for objects of class Box
+    public Cube4(int l, int w, int h) {
+        // call superclass
+        super(l, w, h);
+
+        // initialize instance variables
+    }
+
+    // return the height
+    @Override
+    public int getHeight() {
+        return super.getHeight();
+    }
+
+    // return the name
+    @Override
+    public String getName() {
+        return "Cube";
+    }
+
+    // String to display when object is printed.
+
+    @Override
+    public String toString() {
+        return getName() + " - " + getLength() + " X " + getWidth() + " X " + getHeight();
+    }
+
+}
+#############################
+Quadrilateral.java
+/**
+ * This class defines a Quadrilateral object by extending Cube. The toString
+ * method has been added.
+ *
+ * @author  Cole Woodyard
+ * 
+ * @version 5/13/2021
+ */
+public class Quadrilateral1 extends Cube4 {
+    // instance variables
+
+    // Constructor for objects of class Box
+    public Quadrilateral1(int l, int w, int h) {
+        // call superclass
+        super(l, w, h);
+
+        // initialize instance variables
+    }
+
+    // return the height
+    @Override
+    public int getHeight() {
+        return super.getHeight();
+    }
+
+    // return the name
+    @Override
+    public String getName() {
+        return "Quadrilateral";
+    }
+
+    // String to display when object is printed.
+
+    @Override
+    public String toString() {
+        return getName() + " - " + getLength() + " X " + getWidth() + " X " + getHeight();
+    }
+
+}
+############################
+Diamond.java
+/**
+ * This class defines a Diamond object by extending Cube. The toString method
+ * has been added.
+ *
+ * @author  Cole Woodyard
+ * 
+ * @version 5/13/2021
+ */
+public class Diamond1 extends Cube4 {
+    // instance variables
+
+    // Constructor for objects of class Box
+    public Diamond1(int l, int w, int h) {
+        // call superclass
+        super(l, w, h);
+
+        // initialize instance variables
+    }
+
+    // return the height
+    @Override
+    public int getHeight() {
+        return super.getHeight();
+    }
+
+    // return the name
+    @Override
+    public String getName() {
+        return "Diamond";
+    }
+
+    // String to display when object is printed.
+    @Override
+    public String toString() {
+        return getName() + " - " + getLength() + " X " + getWidth() + " X " + getHeight();
+    }
+
+}

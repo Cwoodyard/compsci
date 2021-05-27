@@ -1,0 +1,58 @@
+Prime.java
+/*
+ * @author: Cole Woodyard
+ * @version 5/16/2021
+ * @purpose prime runner that will state what numbers are prime within a user-given range
+ * 
+ */
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Prime {
+    private static ArrayList<Integer> primers = new ArrayList<Integer>();
+    public static int lower, higher;
+
+    public static void main(String[] args) {
+        // Making it all one program cuz I can
+        Scanner in = new Scanner(System.in);
+        System.out.println("What would your first value like to be?");
+        lower = in.nextInt();
+        System.out.println("What would your last value like to be?");
+        higher = in.nextInt();
+
+        calcPrimes(lower, higher);
+
+        System.out.println("There are " + primers.size() + " hot primes in your area: ");
+        for (int i = 0; i < primers.size(); i++) {
+            System.out.println(primers.get(i));
+            if (i % 10 == 0 && i != 0) {
+                System.out.println();
+            }
+        }
+    }
+
+    // I want a cleaner return call
+    public ArrayList<Integer> getPrimesInYourArea() {
+        return primers;
+    }
+
+    // Tell us if something is prime or not
+    public static boolean primeStatus(int num) {
+        for (int p = 2; p < num; p++) {
+            if (num % p == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    // actually adding it to the arraylist
+    public static void calcPrimes(int low, int high) {
+        for (; low <= high; low++) {
+            if (primeStatus(low)) {
+                primers.add(low);
+            }
+        }
+    }
+}

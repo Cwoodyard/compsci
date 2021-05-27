@@ -1,0 +1,179 @@
+Circle2.java
+/**
+ * This class defines a Circle object.
+ *
+ * @author  Poly Morphism edited by Cole Woodyard
+ * 
+ * @version 05/11/2021
+ */
+
+public class Circle2 {
+    // instance variables
+    private int x;
+    private int y;
+    private int radius;
+
+    // Constructor for objects of class Circle
+    public Circle2(int p_x, int p_y, int r) {
+        // initialize instance variables
+        x = p_x;
+        y = p_y;
+        radius = r;
+    }
+
+    public int getRadius() {
+        return radius;
+    }
+
+    // Concatenates a String to show the center x, y point of the circle
+    public String getCenter() {
+        return "center is at (" + x + ", " + y + ")";
+    }
+
+    public String getName() {
+        return "Circle";
+    }
+}
+############################
+Cylinder2.java
+/**
+ * This class defines a Cylinder object by extending a Circle.
+ *
+ * @author  Poly Morphism edited by Cole Woodyard
+ * 
+ * @version 05/11/2021
+ */
+
+public class Cylinder2 extends Circle2 {
+    // instance variables
+    private int height;
+
+    // Constructor for objects of class Cylinder
+    public Cylinder2(int x, int y, int rad, int h) {
+        // call superclass
+        super(x, y, rad);
+
+        // initialize instance variables
+        height = h;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    @Override
+    public String getName() {
+        return "Cylinder";
+    }
+}
+############################
+Oval2.java
+/**
+ * This class defines an Oval object by extending Circle.
+ *
+ * @author  Poly Morphism edited by Cole Woodyard
+ * 
+ * @version 05/11/2021
+ */
+
+public class Oval2 extends Circle2 {
+    // instance variables
+    private int radius2;
+
+    // Constructor for objects of class Oval
+    public Oval2(int x, int y, int rad1, int rad2) {
+        // call superclass
+        super(x, y, rad1);
+
+        // initialize instance variables
+        radius2 = rad2;
+    }
+
+    public int getRadius2() {
+        return radius2;
+    }
+
+    @Override
+    public String getName() {
+        return "Oval";
+    }
+}
+############################
+OvalCylinder2.java
+/**
+ * This class defines an Oval Cylinder object that extends an Oval.
+ *
+ * @author  Poly Morphism edited by Cole Woodyard
+ * 
+ * @version 05/11/2021
+ */
+
+public class OvalCylinder2 extends Oval2 {
+    // instance variables
+    private int height;
+
+    // Constructor for objects of class OvalCylinder
+    public OvalCylinder2(int x, int y, int rad1, int rad2, int h) {
+        // call superclass
+        super(x, y, rad1, rad2);
+
+        // initialize instance variables
+        height = h;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    @Override
+    public String getName() {
+        return "OvalCylinder";
+    }
+}
+############################
+ClientTester.java
+/*
+ * @purpose Main tester for the Circle's classes
+ * 
+ * @author Cole Woodyard
+ * 
+ * @version 05/11/2021
+ */
+import java.util.ArrayList;
+
+public class ClientTester {
+
+    public String out;
+
+    public ClientTester(String output) {
+        out = output;
+    }
+
+    public static void showCenter(Circle2 c) {
+        switch (c.getName()) {
+            case ("Circle"):
+                System.out.println("For this Circle2 the " + c.getCenter());
+                break;
+            case ("Cylinder"):
+                System.out.println("For this Cylinder2 the " + c.getCenter());
+                break;
+            case ("Oval"):
+                System.out.println("For this Oval2 the " + c.getCenter());
+                break;
+            case ("OvalCylinder"):
+                System.out.println("For this OvalCylinder2 the " + c.getCenter());
+                break;
+        }
+    }
+
+    public static void main(String[] args) {
+        ArrayList<Circle2> client = new ArrayList<Circle2>();
+        client.add(new Circle2(22, 32, 55));
+        client.add(new Cylinder2(22, 33, 56, 2));
+        client.add(new Oval2(310, 351, 63, 55));
+        client.add(new OvalCylinder2(303, 312, 63, 55, 22));
+        for (int i = 0; i < client.size(); i++) {
+            showCenter(client.get(i));
+        }
+    }
+}
